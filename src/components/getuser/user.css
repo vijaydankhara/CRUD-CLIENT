@@ -1,0 +1,117 @@
+/* General styling for the user table container */
+.userTable {
+    width: 60%;
+    background-color: white;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+    border-radius: 5px;
+    margin: 50px auto;
+    padding: 50px;
+}
+
+/* Styling for the Add User button */
+.addButton {
+    text-decoration: none;
+    background-color: purple;
+    color: white;
+    font-weight: 500;
+    border-radius: 5px;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.065);
+    padding: 10px;
+}
+
+/* Styling for the table */
+.userTable table {
+    width: 100%;
+    margin-top: 30px;
+    border-collapse: collapse;
+}
+
+/* Header styling */
+.userTable table thead th {
+    background-color: darkblue;
+    color: white;
+    padding: 10px;
+}
+
+/* Body cell styling */
+.userTable table tbody td {
+    padding: 10px;
+    text-align: center;
+}
+
+/* Action buttons styling */
+.actionsButton button {
+    border: 0;
+    outline: none;
+    background: red;
+    padding: 8px 10px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.actionsButton a {
+    background: green;
+    padding: 6px 10px;
+    color: white;
+    border-radius: 5px;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+/* Responsive styling for medium screens */
+@media (max-width: 768px) {
+    .userTable {
+        width: 90%;
+        padding: 30px;
+    }
+    
+    .addButton {
+        padding: 8px;
+        font-size: 14px;
+    }
+    
+    .userTable table thead th,
+    .userTable table tbody td {
+        padding: 8px;
+        font-size: 14px;
+    }
+    
+    .actionsButton button,
+    .actionsButton a {
+        padding: 6px 8px;
+        font-size: 14px;
+    }
+}
+
+/* Responsive styling for small screens */
+@media (max-width: 480px) {
+    .userTable {
+        width: 100%;
+        padding: 20px;
+        margin: 20px auto;
+    }
+    
+    .addButton {
+        padding: 6px;
+        font-size: 12px;
+    }
+    
+    .userTable table thead th,
+    .userTable table tbody td {
+        padding: 6px;
+        font-size: 12px;
+    }
+    
+    .actionsButton {
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+    }
+    
+    .actionsButton button,
+    .actionsButton a {
+        padding: 5px 7px;
+        font-size: 12px;
+    }
+}
