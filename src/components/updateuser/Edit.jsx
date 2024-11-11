@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./edit.css";
 
-import { Link, useParams , useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Edit = () => {
   const users = {
-    fname: "",
-    lname: "",
+    firstName: "",
+    lastName: "",
     email: "",
+    mobileNo: "",
+    gender: "",
   };
 
   const { id } = useParams();
@@ -37,7 +39,7 @@ const Edit = () => {
       .put(`http://localhost:8000/api/update/${id}`, user)
       .then(() => {
         console.log("User updated successfully");
-        navigate("/"); 
+        navigate("/");
       })
       .catch((error) => {
         console.log("Error updating user:", error);
@@ -50,28 +52,40 @@ const Edit = () => {
       <h3>Update User</h3>
       <form onSubmit={handleSubmit}>
         <div className="inputrGroup">
-          <label htmlFor="fname">Frist Name</label>
+          <label htmlFor="firstName">Frist Name</label>
           <input
             type="text"
             onChange={InputChangeHandal}
-            value={user.fname}
-            id="fname"
-            name="fname"
+            value={user.firstName}
+            id="firstName"
+            name="firstName"
             autoComplete="off"
             placeholder="Enter The Frist Name"
           />
         </div>
 
         <div className="inputrGroup">
-          <label htmlFor="lname">Last Name</label>
+          <label htmlFor="lastName">Last Name</label>
           <input
             type="text"
             onChange={InputChangeHandal}
-            value={user.lname}
-            id="lname"
-            name="lname"
+            value={user.lastName}
+            id="lastName"
+            name="lastName"
             autoComplete="off"
             placeholder="Enter The Frist Name"
+          />
+        </div>
+        <div className="inputrGroup">
+          <label htmlFor="mobileNo">Mobile Number</label>
+          <input
+            type="tel"
+            onChange={InputChangeHandal}
+            value={user.mobileNo}
+            id="mobileNo"
+            name="mobileNo"
+            autoComplete="off"
+            placeholder="Enter the Mobile Number"
           />
         </div>
 

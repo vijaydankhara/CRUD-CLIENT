@@ -35,15 +35,15 @@ const User = () => {
 
   return (
     <div className="userTable">
-      <Link to={"/add"} className="addButton">
-        Add User
-      </Link>
-      <table border={1} cellPadding={10} cellSpacing={0}>
+      <Link to={"/add"} className="addButton">Add User</Link>
+      <table>
         <thead>
           <tr>
             <th>S.No</th>
             <th>User Name</th>
+            <th>Gender</th>
             <th>User Email</th>
+            <th>Mobile No</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -51,12 +51,11 @@ const User = () => {
           {users.map((user, index) => (
             <tr key={user._id}>
               <td>{index + 1}</td>
-              <td>
-                {user.fname} {user.lname}
-              </td>
+              <td>{user.firstName} {user.lastName}</td>
+              <td>{user.gender}</td>
               <td>{user.email}</td>
+              <td>{user.mobileNo}</td>
               <td className="actionsButton">
-                {/* Delete Button */}
                 <button onClick={() => deleteUser(user._id)}>
                   <i className="fa-solid fa-trash"></i>
                 </button>

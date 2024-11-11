@@ -15,26 +15,26 @@
     color: #333;
   }
   
-  .inputrGroup {
+  .inputGroup {
     margin-bottom: 16px;
     display: flex;
     flex-direction: column;
   }
   
-  .inputrGroup label {
+  .inputGroup label {
     font-size: 14px;
     color: #666;
     margin-bottom: 5px;
   }
   
-  .inputrGroup input {
+  .inputGroup input {
     padding: 8px;
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 4px;
   }
   
-  .inputrGroup input:focus {
+  .inputGroup input:focus {
     outline: none;
     border-color: #4caf50;
     box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);

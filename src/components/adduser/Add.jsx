@@ -1,96 +1,124 @@
 import React, { useState } from "react";
 import "./add.css";
-import { Link , useNavigate } from "react-router-dom";
-import axios from "axios"
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import toast from "react-hot-toast";
 
-
 const Add = () => {
+  const initialUser = {
+    firstName: "",
+    lastName: "",
+    gender: "",
+    email: "",
+    password: "",
+    mobileNo: ""
+  };
 
-const users = {
-  fname: "",
-  lname: "",
-  email: "",
-  password: ""
-}
-  const [user, setUser] = useState(users);
+  const [user, setUser] = useState(initialUser);
   const navigate = useNavigate();
 
-  const inputHandal = (e) => { 
-    const { name, value } = e.target; 
-     setUser({...user,  [name]:value});
-     console.log(user);
- 
-  }
+  const inputHandler = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+    console.log(user);
+  };
 
-  const submitForm = async(e) =>{
+  const submitForm = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8000/api/create",user)
-    .then((response) =>{
-     toast.success(response.data.msg, {position: 'top-right'})
-     navigate("/")
-    }).catch(error => console.log(error))
-  }
+    try {
+      const response = await axios.post("http://localhost:8000/api/create", user);
+      toast.success(response.data.msg, { position: 'top-right' });
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to add user", { position: 'top-right' });
+    }
+  };
 
   return (
     <div className="addUser">
       <Link to={"/"}>Back</Link>
       <h3>Add New User</h3>
       <form onSubmit={submitForm}>
-        <div className="inputrGroup">
-          <label htmlFor="fname">Frist Name</label>
+        <div className="inputGroup">
+          <label htmlFor="firstName">First Name</label>
           <input
             type="text"
-            onChange={inputHandal}
-            id="fname"
-            name="fname"
+            onChange={inputHandler}
+            id="firstName"
+            name="firstName"
             autoComplete="off"
-            placeholder="Enter The Frist Name"
+            placeholder="Enter the First Name"
+            required
           />
         </div>
 
-        <div className="inputrGroup">
-          <label htmlFor="lname">Last Name</label>
+        <div className="inputGroup">
+          <label htmlFor="lastName">Last Name</label>
           <input
             type="text"
-            onChange={inputHandal}
-            id="lname"
-            name="lname"
+            onChange={inputHandler}
+            id="lastName"
+            name="lastName"
             autoComplete="off"
-            placeholder="Enter The Frist Name"
+            placeholder="Enter the Last Name"
+            required
           />
         </div>
 
-        <div className="inputrGroup">
+        <div className="inputGroup">
+          <label htmlFor="gender">Gender</label>
+          <select name="gender" id="gender" onChange={inputHandler} required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+
+        <div className="inputGroup">
           <label htmlFor="email">Email</label>
           <input
-            type="text"
-            onChange={inputHandal}
+            type="email"
+            onChange={inputHandler}
             id="email"
             name="email"
             autoComplete="off"
-            placeholder="Email"
+            placeholder="Enter Email"
+            required
           />
         </div>
 
-        <div className="inputrGroup">
+        <div className="inputGroup">
           <label htmlFor="password">Password</label>
           <input
-            type="text"
-            onChange={inputHandal}
+            type="password"
+            onChange={inputHandler}
             id="password"
             name="password"
             autoComplete="off"
-            placeholder="Password"
+            placeholder="Enter Password"
+            required
           />
         </div>
 
-        <div className="inputrGroup">
-          <button type="submit">ADD USER</button>
+        <div className="inputGroup">
+          <label htmlFor="mobileNo">Mobile Number</label>
+          <input
+            type="tel"
+            onChange={inputHandler}
+            id="mobileNo"
+            name="mobileNo"
+            autoComplete="off"
+            placeholder="Enter Mobile Number"
+          />
+        </div>
+
+        <div className="inputGroup">
+          <button type="submit">Add User</button>
         </div>
       </form>
     </div>
   );
-}
+};
 
 export default Add;
