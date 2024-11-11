@@ -6,6 +6,24 @@ import "./user.css";
 
 const User = () => {
   const [users, setUsers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 5; 
+
+   // Pagination calculations
+   const indexOfLastUser = currentPage * usersPerPage;
+   const indexOfFirstUser = indexOfLastUser - usersPerPage;
+   const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+ 
+   const totalPages = Math.ceil(users.length / usersPerPage);
+ 
+   // Handle page change
+   const handleNextPage = () => {
+     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+   };
+ 
+   const handlePrevPage = () => {
+     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+   };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,7 +42,7 @@ const User = () => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       try {
         const response = await axios.delete(`http://localhost:8000/api/delete/${userId}`);
-        setUsers((prevUser) => prevUser.filter((user) => user._id !== userId));
+        setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
         toast.success(response.data.msg, { position: "top-right" });
       } catch (error) {
         console.error("Error deleting user:", error);
@@ -32,6 +50,8 @@ const User = () => {
       }
     }
   };
+
+ 
 
   return (
     <div className="userTable">
@@ -48,9 +68,9 @@ const User = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user, index) => (
+          {currentUsers.map((user, index) => (
             <tr key={user._id}>
-              <td>{index + 1}</td>
+              <td>{indexOfFirstUser + index + 1}</td>
               <td>{user.firstName} {user.lastName}</td>
               <td>{user.gender}</td>
               <td>{user.email}</td>
@@ -67,6 +87,17 @@ const User = () => {
           ))}
         </tbody>
       </table>
+
+      {/* Pagination Controls */}
+      <div className="pagination">
+        <button onClick={handlePrevPage} disabled={currentPage === 1}>
+          Previous
+        </button>
+        <span>Page {currentPage} of {totalPages}</span>
+        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+          Next
+        </button>
+      </div>
     </div>
   );
 };
