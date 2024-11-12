@@ -24,7 +24,8 @@ const Edit = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/getone/${id}`)
+      // .get(`http://localhost:8000/api/getone/${id}`)
+      .get(`https://crud-server-70av.onrender.com/api/getone/${id}`)
       .then((response) => {
         setUser(response.data);
       })
@@ -36,7 +37,8 @@ const Edit = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(`http://localhost:8000/api/update/${id}`, user)
+      // .put(`http://localhost:8000/api/update/${id}`, user)
+      .put(`https://crud-server-70av.onrender.com/api/update/${id}`, user)
       .then(() => {
         console.log("User updated successfully");
         navigate("/");
