@@ -42,7 +42,9 @@ const User = () => {
   const deleteUser = async (userId) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       try {
-        const response = await axios.delete(`http://localhost:8000/api/delete/${userId}`);
+        // const response = await axios.delete(`http://localhost:8000/api/delete/${userId}`);
+        const response = await axios.delete(`https://crud-server-70av.onrender.com/api/delete/${userId}`);
+        
         setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
         toast.success(response.data.msg, { position: "top-right" });
       } catch (error) {
